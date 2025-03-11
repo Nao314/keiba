@@ -412,11 +412,11 @@
         offCtx.lineWidth = this.trackWidth;
         offCtx.strokeStyle = trackColor;
         offCtx.beginPath();
-        offCtx.arc(this.innerX2 + offsetX, this.centerY + offsetY, this.radius + this.trackWidth, -Math.PI/2, Math.PI/2);
+        offCtx.arc(this.innerX2 + offsetX, this.centerY + offsetY, this.radius + this.trackWidth/2, -Math.PI/2, Math.PI/2);
         offCtx.stroke();
         // 左カーブ
         offCtx.beginPath();
-        offCtx.arc(this.innerX1 + offsetX, this.centerY + offsetY, this.radius + this.trackWidth, Math.PI/2, Math.PI*3/2);
+        offCtx.arc(this.innerX1 + offsetX, this.centerY + offsetY, this.radius + this.trackWidth/2, Math.PI/2, Math.PI*3/2);
         offCtx.stroke();
         // レーン白線
         offCtx.lineWidth = 1;
