@@ -361,7 +361,7 @@
             let centerX = this.innerX2;
             let centerY = this.centerY;
             // 修正：カーブでは内側基準ではなく、トラックの中心線に合わせる
-            let radius = this.radius + this.trackWidth/2 + lanePos;
+            let radius = this.radius + this.trackWidth + lanePos;
             result.x = centerX + radius * Math.sin(angleRad);
             result.y = centerY - radius * Math.cos(angleRad);
             result.angle = angleRad * 180 / Math.PI;
@@ -375,7 +375,7 @@
           let angleRad = Math.PI + sectionProgress * Math.PI;
           let centerX = this.innerX1;
           let centerY = this.centerY;
-          let radius = this.radius + this.trackWidth/2 + lanePos;
+          let radius = this.radius + this.trackWidth + lanePos;
           result.x = centerX + radius * Math.sin(angleRad);
           result.y = centerY - radius * Math.cos(angleRad);
           result.angle = angleRad * 180 / Math.PI;
