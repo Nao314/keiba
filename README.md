@@ -357,16 +357,17 @@
           result.y = this.innerY1 - lanePos;
           result.angle = 0;
         } else if (currentSection === 1) { // 右カーブ
-          let angleRad = sectionProgress * Math.PI;
-          let centerX = this.innerX2;
-          let centerY = this.centerY;
-          let radius = this.radius + lanePos;
-          result.x = centerX + radius * Math.sin(angleRad);
-          result.y = centerY - radius * Math.cos(angleRad);
-          result.angle = angleRad * 180 / Math.PI;
-          result.isCorner = true;
-          result.cornerNum = (sectionProgress < 0.5) ? 1 : 2;
-        } else if (currentSection === 2) { // 下直線
+            let angleRad = sectionProgress * Math.PI;
+            let centerX = this.innerX2;
+            let centerY = this.centerY;
+            // 修正：カーブでは内側基準ではなく、トラックの中心線に合わせる
+            let radius = this.radius + this.trackWidth/2 + lanePos;
+            result.x = centerX + radius * Math.sin(angleRad);
+            result.y = centerY - radius * Math.cos(angleRad);
+            result.angle = angleRad * 180 / Math.PI;
+            result.isCorner = true;
+            result.cornerNum = (sectionProgress < 0.5) ? 1 : 2;
+          }else if (currentSection === 2) { // 下直線
           result.x = this.innerX2 - sectionProgress * this.straightWidth;
           result.y = this.innerY2 + lanePos;
           result.angle = 180;
@@ -374,7 +375,7 @@
           let angleRad = Math.PI + sectionProgress * Math.PI;
           let centerX = this.innerX1;
           let centerY = this.centerY;
-          let radius = this.radius + lanePos;
+          let radius = this.radius + this.trackWidth/2 + lanePos;
           result.x = centerX + radius * Math.sin(angleRad);
           result.y = centerY - radius * Math.cos(angleRad);
           result.angle = angleRad * 180 / Math.PI;
@@ -1506,12 +1507,12 @@
       lastTime = currentTime;
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       if (gameState === GAME_STATE_ENTRY) {
+        // 出走表のみを描画（背景は任意）
         drawEntryTable(ctx, racers, course, fonts);
         ctx.fillStyle = "#FFFFFF";
         ctx.font = fonts.small;
         ctx.fillText("スペースキーを押してレースを開始", WIDTH/2 - 150, HEIGHT - 50);
-        track.draw(ctx, course);
-        racers.forEach(r => r.draw(ctx));
+        // ※ここでは track.draw や馬の描画は行わず、出走表がそのまま表示されるようにする
       } else if (gameState === GAME_STATE_COUNTDOWN) {
         track.draw(ctx, course);
         ctx.fillStyle = "#FFFFFF";
