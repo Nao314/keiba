@@ -292,11 +292,11 @@
         ctx.lineWidth = this.trackWidth;
         ctx.strokeStyle = trackColor;
         ctx.beginPath();
-        ctx.arc(this.innerX2, this.centerY, this.radius + this.trackWidth, -Math.PI/2, Math.PI/2);
+        ctx.arc(this.innerX2, this.centerY, this.radius + this.trackWidth / 2, -Math.PI/2, Math.PI/2);
         ctx.stroke();
         // 左カーブ
         ctx.beginPath();
-        ctx.arc(this.innerX1, this.centerY, this.radius + this.trackWidth, Math.PI/2, Math.PI*3/2);
+        ctx.arc(this.innerX1, this.centerY, this.radius + this.trackWidth / 2, Math.PI/2, Math.PI*3/2);
         ctx.stroke();
         // レーンの白線
         ctx.lineWidth = 1;
